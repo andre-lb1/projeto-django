@@ -8,7 +8,7 @@ def about(request):
     return HttpResponse('About.')
 
 def contact(request):
-    return HttpResponse('Contact.')
+    return render(request,'me-apague/home.html')
 
 
 
