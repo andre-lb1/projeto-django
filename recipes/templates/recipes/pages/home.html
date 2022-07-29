@@ -1,10 +1,13 @@
 {% include 'partials/head.html' %}
 
 <body>
-  <header class="main-header container">
+  <header class="main-header-container">
       <div class="main-header container">
-          <h1 id="recipes-title">
-              <a href="{% url 'home' %}"><i class="fas fa-address-card"></i> Recipes by {{name}}</a>
+          <h1>
+              <a href="{% url 'home' %}" class="main-logo">
+                <i class="fas fa-utensils main-logo-icon"></i>
+                  <span class="main-logo-text">Recipes</span>
+              </a>
           </h1>
       </div>
   </header>
