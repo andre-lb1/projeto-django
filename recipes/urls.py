@@ -1,12 +1,12 @@
 from turtle import home
 from django.contrib import admin
 from django.urls import path,include
-from .views import home
+from . import views
 
 #Domain.com/
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', views.home, name='home'),
+    path('recipes/<int:id>/', views.recipes, name='recipes'),
    
 ]
