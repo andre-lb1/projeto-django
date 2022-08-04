@@ -14,7 +14,8 @@ def category(request,category_id):
     return render(request,'recipes/pages/category.html',{'recipes' : recipes, 'category_name': f'Category - {recipes[0].category.name} │'})
     
 def recipes(request,id):
-    return render(request,'recipes/pages/recipe-view.html',{'recipe' : make_recipe(),'is_detail_page':True})
+    recipe = get_object_or_404(Recipes.objects.filter(id = id))
+    return render(request,'recipes/pages/recipe-view.html',{'recipe' : recipe,'is_detail_page':True})
 
 
 

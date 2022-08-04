@@ -1,9 +1,13 @@
 {% extends 'global/base.html' %}
-{% block title %}Recipe of {{ recipe.author.first_name }} │ {% endblock title %}
+{% block title %}
+{% if recipe.author.first_name %}
+Recipe of {{ recipe.author.first_name }}
+{%else%}
+Recipe of ?
+{%endif%} │ {% endblock title %}
     {% block content %}
       <div class="main-content main-contest-detail container">
         {% include 'partials/recipe.html'%}
-
       </div>
     {% endblock content%}
     
