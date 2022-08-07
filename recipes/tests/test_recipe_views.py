@@ -1,7 +1,8 @@
 from base64 import decode
 from django.urls import resolve, reverse
-from recipes.views import category, home, recipes
+from recipes.views import category, home, recipes, search
 from .test_recipe_base import RecipeTestBase
+
 
 
 class RecipeViewsTest(RecipeTestBase):
@@ -83,3 +84,9 @@ class RecipeViewsTest(RecipeTestBase):
         response = self.client.get(reverse('recipes:recipe', kwargs={'id': 1}))
         self.assertEqual(response.status_code, 404)
         self.assertNotIn(needed_title, response.content.decode('utf-8'))
+
+
+    def test_recipe_search_views_is_correct(self):
+        response = resolve(reverse('recipes:search'))
+        self.assertEqual(response.func, search)
+
