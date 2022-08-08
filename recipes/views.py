@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from utils.recipes.random_recipes import make_recipe
 from .models import Category, Recipes
@@ -21,4 +22,15 @@ def recipes(request, id):
     return render(request, 'recipes/pages/recipe-view.html', {'recipe': recipe, 'is_detail_page': True})
 
 def search(request):
-    ...
+    search_term = request.GET.get('q','').strip() # --> return None if 'q' is null or space(s).
+    if not search_term:
+        raise Http404()
+
+    recipes = []
+    for recipe in Recipes.objects.all():
+        if search_term in recipe.title:
+            recipes.append(recipe)
+
+    return render(request, 'recipes/pages/search.html', 
+    context = {'recipes':recipes, 'page_title' : f'Search for {search_term} │', 
+    'search_term' : search_term})

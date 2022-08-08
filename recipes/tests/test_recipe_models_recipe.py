@@ -14,7 +14,7 @@ class RecipeTestModels(RecipeTestBase):
         return Recipes.objects.create(
         title = 'recipe title',
         description = 'desc',
-        slug = 'recipe-test',
+        slug = 'recipe-test-for-no-defaults',
         preparation_time = '5',
         preparation_time_unit = 'min',
         servings = '1',

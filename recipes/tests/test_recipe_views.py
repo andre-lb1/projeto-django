@@ -85,8 +85,19 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertEqual(response.status_code, 404)
         self.assertNotIn(needed_title, response.content.decode('utf-8'))
 
-
     def test_recipe_search_views_is_correct(self):
         response = resolve(reverse('recipes:search'))
         self.assertEqual(response.func, search)
+
+    def test_recipe_search_loads_correct_template(self):
+        response = self.client.get(reverse('recipes:search') + '?q=testing')
+        self.assertTemplateUsed(response, 'recipes/pages/search.html')
+
+    def test_recipe_search_raises_404_if_no_q(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertEqual(response.status_code,404)
+
+    def test_recipe_search_term_is_on_title_and_escaped(self):
+        response = self.client.get(reverse('recipes:search')  + '?q=<testing term>')
+        self.assertIn('Search for &lt;testing term&gt', response.content.decode('utf-8'))
 
